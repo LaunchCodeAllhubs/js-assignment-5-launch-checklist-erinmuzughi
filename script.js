@@ -9,16 +9,15 @@ window.addEventListener("load", function() {
        const cargoMassInput = document.querySelector("input[name=cargoMass]");
        const list = document.getElementById("faultyItems");
        // stop the form submission
-       
+       event.preventDefault();
        if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "") {
           alert("All fields are required!");
        } else {
        let resultsReturned = formSubmission(window.document, list, pilotNameInput.value, copilotNameInput.value, fuelLevelInput.value, cargoMassInput.value);
         if (resultsReturned !== "success"){
-            alert(`${resultsReturned}`)
+            alert(`${resultsReturned}`);
        }
     }
-    event.preventDefault();
     });
     
    let listedPlanets;

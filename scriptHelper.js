@@ -46,23 +46,26 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let cargoStatus = document.getElementById("cargoStatus");
      //If the user submits a fuel level that is too low (less than 10,000 liters), change faultyItems to visible with an updated fuel status stating that there is not enough fuel for the journey. 
      //The text of the h2 element, launchStatus, should also change to "Shuttle not ready for launch" and the color should change to red.
-    if (fuelLevel > 10000 && cargoLevel < 10000) {
-        list.style.visibility = 'hidden';
+    if (fuelLevel >= 10000 && cargoLevel <= 10000) {
+        list.style.visibility = "visible";
         launchStatus.innerHTML = "Shuttle is Ready for Launch";
         launchStatus.style.color = "rgb(65, 159, 106)";
-    } else if (fuelLevel < 10000 || cargoLevel > 10000) { //I originally had two separate if statements here but figured out that depending on the input, sometimes it would execute both, or even execute both if statements and the else statement, resulting in the h2 indicating the shuttle was ready for launch even when the fuel level was too low. 
+    } 
+    if (fuelLevel < 10000 || cargoLevel > 10000) { //I originally had two separate if statements here but figured out that depending on the input, sometimes it would execute both, or even execute both if statements and the else statement, resulting in the h2 indicating the shuttle was ready for launch even when the fuel level was too low. 
         list.style.visibility = 'visible';
         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
         launchStatus.style.color = "rgb(199, 37, 78)";
         if (fuelLevel < 10000){
             fuelStatus.innerHTML = "Fuel level too low for launch";
+        } else {
+            fuelStatus.innerHTML = "Fuel level high enough for launch";
         }
         if (cargoLevel > 10000) {
             cargoStatus.innerHTML = "Cargo mass too heavy for launch";
+        } else {
+            cargoStatus.innerHTML = "Cargo mass low enough for launch";
         }
-    } else {
-        
-    }
+    } 
     return "success"
     
 }
